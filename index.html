@@ -1,225 +1,368 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Portfólio</title>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(120deg, #eb8edb, #72d8f774);
-            color: #333;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfólio • Livian Essvein</title>
+  <meta name="description" content="Portfólio de Livian Essvein — projetos web, estudos e contato." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1220;
+      --panel:#14182b;
+      --muted:#8a91b4;
+      --text:#e7e9f4;
+      --primary:#7bd1ff;
+      --primary-2:#ff9ed1;
+      --stroke:rgba(255,255,255,.08);
+      --radius:16px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --maxw:1100px;
+    }
+    html{scroll-behavior:smooth}
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 600px at 90% -10%, rgba(255,158,209,.15), transparent 60%),
+        radial-gradient(800px 500px at -10% 20%, rgba(123,209,255,.12), transparent 60%),
+        var(--bg);
+      color:var(--text);
+    }
+    a{color:var(--primary); text-decoration:none}
+    a:hover{opacity:.9}
+    .container{max-width:var(--maxw); margin:auto; padding:0 20px}
 
-        header {
-            background: #72d8f774;
-            color: #fff;
-            padding: 2rem 0;
-            text-align: center;
-        }
+    /* Skip link */
+    .skip{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden}
+    .skip:focus{left:16px; top:16px; width:auto; height:auto; padding:8px 12px; background:var(--panel); border:1px solid var(--stroke); border-radius:8px}
 
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(12px);
+      background:linear-gradient( to bottom, rgba(20,24,43,.85), rgba(20,24,43,.6));
+      border-bottom:1px solid var(--stroke);
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; height:68px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.3px}
+    .logo{
+      width:36px; height:36px; border-radius:10px; display:grid; place-items:center; font-weight:700;
+      background:linear-gradient(135deg, var(--primary), var(--primary-2)); color:#0e1220;
+      box-shadow:0 6px 20px rgba(123,209,255,.25), inset 0 0 15px rgba(255,255,255,.3);
+    }
+    nav ul{display:flex; gap:22px; list-style:none; margin:0; padding:0}
+    nav a{
+      display:inline-block; padding:10px 12px; border-radius:10px; color:var(--text); font-weight:600; font-size:.98rem;
+    }
+    nav a:hover{background:rgba(255,255,255,.05)}
 
-        nav {
-            margin-top: 1rem;
-        }
+    /* Hero */
+    .hero{padding:88px 0 56px}
+    .hero-inner{display:grid; gap:18px}
+    .kicker{color:var(--muted); text-transform:uppercase; font-size:.8rem; letter-spacing:.18em}
+    h1{
+      margin:0; font-size: clamp(1.9rem, 4vw, 3rem); line-height:1.15; letter-spacing:.3px;
+    }
+    .subtitle{color:var(--muted); max-width:60ch}
+    .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:12px; border:1px solid var(--stroke); font-weight:600}
+    .btn.primary{background:linear-gradient(135deg, rgba(123,209,255,.2), rgba(255,158,209,.2)); border-color:transparent}
 
-        nav a {
-            color: #fff;
-            margin: 0 1rem;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-        }
+    /* Sections */
+    section{padding:38px 0}
+    .section-title{font-size:1.4rem; margin:0 0 20px}
+    .panel{background:var(--panel); border:1px solid var(--stroke); border-radius:var(--radius); box-shadow:var(--shadow)}
+    .panel-pad{padding:22px}
+    .muted{color:var(--muted)}
 
-        nav a:hover {
-            color: #92bcf3;
-        }
+    /* About */
+    .about p{margin:0 0 10px}
 
-        section {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            transition: transform 0.3s;
-        }
+    /* Projects */
+    .grid{display:grid; gap:18px}
+    @media (min-width: 780px){ .grid{grid-template-columns: repeat(12, 1fr)} }
+    .card{grid-column: span 12; display:grid; gap:14px}
+    @media (min-width:780px){ .card{grid-template-columns: 5fr 7fr} }
+    .thumbs{display:grid; grid-auto-flow:column; gap:10px; overflow:auto; padding-bottom:6px}
+    .thumbs img{
+      width:100%; height:220px; object-fit:cover; border-radius:12px; border:1px solid var(--stroke);
+      transition: transform .25s ease, box-shadow .25s ease; cursor: zoom-in
+    }
+    .thumbs img:hover{transform:scale(1.04); box-shadow:0 12px 30px rgba(0,0,0,.35)}
+    .badge{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(123,209,255,.15); border:1px solid rgba(123,209,255,.35); font-size:.8rem; font-weight:600}
+    .actions{display:flex; gap:10px; flex-wrap:wrap}
 
-        section:hover {
-            transform: scale(1.02);
-        }
+    /* Contact */
+    .contact-list{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:999px; border:1px solid var(--stroke); background:rgba(255,255,255,.02)}
+    .chip svg{width:18px; height:18px}
 
-        section h2 {
-            border-bottom: 3px solid #92bcf3;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            color: #333;
-        }
+    /* Footer */
+    footer{padding:40px 0 50px; color:var(--muted); border-top:1px solid var(--stroke); margin-top:30px}
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+    /* Reveal on scroll */
+    .reveal{opacity:0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1; transform:none}
 
-        ul li {
-            margin-bottom: 1rem;
-        }
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .reveal{opacity:1; transform:none}
+    }
 
-        ul li strong {
-            color: #92bcf3;
-        }
-
-        footer {
-            background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
-        }
-
-        footer p {
-            margin: 0;
-        }
-
-        a {
-            color: #92bcf3;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        a:hover {
-            color: #92bcf3;
-        }
-
-        .div-fotos {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    /* Lightbox */
+    #lightbox{position:fixed; inset:0; background:rgba(0,0,0,.75); display:none; align-items:center; justify-content:center; z-index:1000; padding:30px}
+    #lightbox.show{display:flex}
+    .lb-frame{position:relative; max-width:min(92vw, 1200px);}
+    .lb-img{max-width:92vw; max-height:78vh; border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.6); border:1px solid rgba(255,255,255,.12)}
+    .lb-controls{position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; pointer-events:none}
+    .lb-btn{pointer-events:auto; appearance:none; border:1px solid rgba(255,255,255,.2); background:rgba(20,24,43,.6); color:#fff; width:42px; height:42px; border-radius:999px; display:grid; place-items:center; cursor:pointer}
+    .lb-btn:hover{background:rgba(20,24,43,.8)}
+    .lb-close{position:absolute; top:-18px; right:-18px}
+    @media (max-width:540px){ .lb-btn{width:38px; height:38px} }
+  </style>
 </head>
-
 <body>
-    <header>
-        <h1>Livian's portfolio</h1>
-        <nav>
-            <a href="#sobre">Sobre Mim 😃</a>
-            <a href="#projetos">Projetos 📚</a>
-            <a href="#contato">Contato ☎️</a>
-        </nav>
-    </header>
-
-    <section id="sobre">
-        <h2>Sobre Mim</h2>
-        <p>Olá! Meu nome é Livian, sou uma desenvolvedora em formação fascinada por tecnologia e inovação. Tenho
-            experiência em frontend e backend, e estou sempre em busca de novos aprendizados.</p>
-        <p>Nos últimos anos, trabalhei em projetos que envolviam, inicialmente, Inteligência Artificial com Pyhton e,
-            atualmente,
-            desenvolvimento de software, com C#. Entre junho e dezembro de 2023, participei do programa TWIST, de
-            capacitação em
-            desenvolvimento web para mulheres, criando um site em HTML, CSS, JavaScript e React.</p>
-    </section>
-
-    <section id="projetos">
-        <h2>Projetos</h2>
+  <a href="#conteudo" class="skip">Pular para o conteúdo</a>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">L</div>
+        <span>Livian Essvein</span>
+      </div>
+      <nav aria-label="Navegação principal">
         <ul>
-            <li>
-                <strong>Mulheres de Favela</strong>
-                Site em HTML, CSS, JavaScript e React
-                focado nas experiências das mulheres contadas no livro Mulheres de Favela de
-                Nilza Nunes.
-                <br><br>
-
-                <div class="div-fotos">
-                    <img src="https://www.dropbox.com/scl/fi/ce4u98folt1ztf5aeciie/MulheresDeFavela.jpeg?rlkey=xwusfplfkwz10bz6n5rxaipke&st=0u7pd89j&raw=1" width="450" height="250">
-                    <img src="https://www.dropbox.com/scl/fi/ljm9x2u1j2uu8dwj3kkts/Mulheres.jpeg?rlkey=2w5hql10u8bas81sty07ybpuo&st=yaqz0r9e&raw=1" width="450" height="250">
-                </div>
-
-                <br><br>
-
-                <a href="https://web.tecgraf.puc-rio.br/~livianessvein/" cursor: pointer>Acesse aqui o projeto completo Mulheres de Favela</a> (O link deverá ser aberto em uma nova aba).
-
-            </li>
-
-            <br><br>
-
-            <li>
-                <strong>AcessoBolsas.com</strong>
-                Um site desenvolvido em equipe com o objetivo de fornecer informações mais detalhadas, uma divulgação
-                mais ampla e acessível e simplificar processos de inscrição à respeito de Bolsas Acadêmicas.
-                <br><br>
-                <div class="div-fotos">
-                    <img src="https://www.dropbox.com/scl/fi/aq9e6b7as8t9ac51dkj8s/AcessoBolsas.jpeg?rlkey=i6argniwy25una304fuy29rdq&st=arfcmzba&raw=1" width="400" height="250">
-                    <img src="https://www.dropbox.com/scl/fi/ejhtw4q6tbcr2tuzqmf6m/PagBolsa.jpeg?rlkey=td3c1o493blnx5jumtahjkruf&st=aknslaqv&raw=1" width="400" height="250">
-                </div>
-            </li>
-
-            <!-- <br><br> -->
-
-            <!-- <li>
-                <strong>Jogo da Forca</strong>
-                Um jogo da Forca que tem duas modalidades:
-                <br>
-                Fácil: Entre 3 a 8 letras e 6 tentativas.
-                <br>
-                Difícil: 8+ letras e 3 tentativas.
-            </li> -->
-
-            <br><br>
-
-            <li>
-                <strong>Lista de Contatos</strong>
-                Uma lista "telefônica" com contatos e handles. Com as opções de criar, deletar e editar seus contatos.
-                <br>
-                <div class="div-fotos">
-                    <img src="https://www.dropbox.com/scl/fi/ys5dl0d8h4dy61jyqnrrq/AddContact.jpeg?rlkey=w0rgmwlx28ietfw6jxv5aujxm&st=vukhdo4w&raw=1" width="300" height="210">
-                    <div class="div-lista-contatos">
-            <li><img src="https://www.dropbox.com/scl/fi/q8thaenwtlqb2iffou1ub/SearchContact.jpeg?rlkey=hdhxlccq28ws7n5ll83lifwma&st=x35fc77j&raw=1" width="100%" height="110"></li>
-            <li><img src="https://www.dropbox.com/scl/fi/w4382bmctz5j4d6szrufa/ListaContatos.jpeg?rlkey=lhrxrvspeuel1eadev5x258ph&st=ecoj7uay&raw=1" width="100%" height="150"></li>
-            </div>
-            </div>
-            </li>
-
-            <br><br>
-
-            <li>
-                <strong>Barbie's Lifestyle</strong>
-                Um jogo da Barbie onde devemos colocar na sacola de compras itens caracteristicos dos filmes da Barbie
-                e, confome os itens se tornam mais valiosos, os nossos Pontos de Glitter aumentam.
-                <br>
-                <div class="div-fotos">
-                    <img src="https://www.dropbox.com/scl/fi/qnh0dn9wgt91syu7siy8o/Barbie.jpeg?rlkey=lz71scxx3cy1wx0508bdnsmy5&st=qd87o7pw&raw=1" width="400" height="380">
-                </div>
-            </li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#contato">Contato</a></li>
         </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" class="container">
+    <!-- HERO -->
+    <section class="hero reveal" aria-label="Apresentação">
+      <div class="hero-inner">
+        <span class="kicker">Desenvolvimento • Web • Criatividade</span>
+        <h1>Portfólio</h1>
+        <p class="subtitle">
+          Olá! Meu nome é <strong>Livian Essvein</strong>. Sou fascinada por tecnologia e inovação. Tenho experiência em frontend e backend e estou sempre em busca de novos aprendizados.
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="#projetos">Ver projetos</a>
+          <a class="btn" href="#contato">Falar comigo</a>
+        </div>
+      </div>
     </section>
 
-    <section id="contato">
-        <h2>Contato</h2>
-        <p>Você pode entrar em contato comigo pelo e-mail: <a href="mailto:livianessvein@gmail.com" cursor:
-                pointer>livianessvein@gmail.com</a></p>
-        <p>Ou me encontrar nas redes sociais:</p>
-        <ul>
-            <li><a href="https://www.linkedin.com/in/livian-essvein-de-oliveira-95a313207/" cursor: pointer>LinkedIn</a>
-            </li>
-            <li><a href="https://github.com/livianessvein" cursor: pointer>GitHub</a></li>
-        </ul>
+    <!-- SOBRE -->
+    <section id="sobre" class="about panel panel-pad reveal" aria-label="Sobre mim">
+      <h2 class="section-title">Sobre mim</h2>
+      <p>
+        Sou estudante de <strong>Ciência da Computação na PUC-Rio</strong>, com experiência em <strong>desenvolvimento fullstack</strong> e <strong>pesquisa acadêmica</strong>. Trabalhei com <strong>C#</strong>, <strong>JavaScript</strong>, <strong>Python</strong> e <strong>MySQL</strong> em projetos no <strong>Instituto TecGraf/PUC-Rio</strong>, contribuindo para aplicações de gerenciamento de reservatórios e para um modelo de recomendação em IA. Participei do <strong>programa TWIST</strong>, focado em desenvolvimento web e inclusão feminina na tecnologia, criando um site completo em <strong>HTML/CSS/JavaScript/React</strong>. Desde agosto de 2025, integro o <strong>LabNITAS/PUC-Rio</strong> em uma <em>Iniciação Científica (PIBIC)</em> que investiga como o uso do ChatGPT impacta a <strong>autonomia intelectual</strong> de estudantes universitários, envolvendo revisão de literatura, prototipagem de um assistente reflexivo e avaliação empírica com questionários e entrevistas.
+      </p>
     </section>
 
-    <footer>
-        <p>&copy; 2024 [Livian Essvein]. Todos os direitos reservados.</p>
-    </footer>
+    <!-- PROJETOS -->
+    <section id="projetos" class="panel panel-pad reveal" aria-label="Projetos">
+      <h2 class="section-title">Projetos em destaque</h2>
+      <div class="grid">
+        <!-- Mulheres de Favela -->
+        <article class="card panel panel-pad">
+          <div class="thumbs">
+            <img src="https://www.dropbox.com/scl/fi/ce4u98folt1ztf5aeciie/MulheresDeFavela.jpeg?rlkey=xwusfplfkwz10bz6n5rxaipke&st=0u7pd89j&raw=1" alt="Página do projeto Mulheres de Favela" loading="lazy">
+            <img src="https://www.dropbox.com/scl/fi/ljm9x2u1j2uu8dwj3kkts/Mulheres.jpeg?rlkey=2w5hql10u8bas81sty07ybpuo&st=yaqz0r9e&raw=1" alt="Detalhe visual do projeto Mulheres de Favela" loading="lazy">
+          </div>
+          <div>
+            <h3>Mulheres de Favela</h3>
+            <p class="muted">Site em HTML, CSS, JavaScript e React focado nas experiências retratadas no livro <em>Mulheres de Favela</em> de Nilza Nunes.</p>
+            <div class="actions">
+              <span class="badge">React</span>
+              <span class="badge">Acessível</span>
+              <a class="btn" target="_blank" rel="noopener noreferrer" href="https://web.tecgraf.puc-rio.br/~livianessvein/">Acessar projeto</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- AcessoBolsas -->
+        <article class="card panel panel-pad">
+          <div class="thumbs">
+            <img src="https://www.dropbox.com/scl/fi/aq9e6b7as8t9ac51dkj8s/AcessoBolsas.jpeg?rlkey=i6argniwy25una304fuy29rdq&st=arfcmzba&raw=1" alt="Página inicial do AcessoBolsas" loading="lazy">
+            <img src="https://www.dropbox.com/scl/fi/ejhtw4q6tbcr2tuzqmf6m/PagBolsa.jpeg?rlkey=td3c1o493blnx5jumtahjkruf&st=aknslaqv&raw=1" alt="Tela de detalhes de bolsas do projeto" loading="lazy">
+          </div>
+          <div>
+            <h3>AcessoBolsas.com</h3>
+            <p class="muted">Projeto colaborativo para tornar informações sobre bolsas acadêmicas mais acessíveis e simplificar processos de inscrição.</p>
+            <div class="actions">
+              <span class="badge">Equipe</span>
+              <span class="badge">Frontend</span>
+              <span class="badge">UX</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Jogo de Xadrez -->
+        <article class="card panel panel-pad">
+          <div class="thumbs">
+            <img src="https://www.dropbox.com/scl/fi/628x8zjomgmjd4al3tefs/xadrez-movimento.png?rlkey=7uyyyu3avkokpqojx2c9bowox&st=l15bdfew&raw=1" alt="Tela do tabuleiro" loading="lazy">
+            <img src="https://www.dropbox.com/scl/fi/gcl94itzjzy3nql42gv60/xadrez.png?rlkey=qgsmxjqypjcp54e4l62i5axzx&st=ojet37s0&raw=1" alt="Tela do tabuleiro" loading="lazy">
+            <img src="https://www.dropbox.com/scl/fi/6bs9on4grtfhpyqiiwa0h/xeque.png?rlkey=8vzg4xbxg9r4pigx4oyifhsh2&st=e1trx6r4&raw=1" alt="Tela do tabuleiro" loading="lazy">
+        </div>
+          <div>
+            <h3>Jogo de Xadrez</h3>
+            <p class="muted">Um jogo de Xadrez completo feito com Java</p>
+            <div class="actions">
+              <span class="badge">CRUD</span>
+              <span class="badge">JS</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Lista de Contatos -->
+        <article class="card panel panel-pad">
+          <div class="thumbs">
+            <img src="https://www.dropbox.com/scl/fi/ys5dl0d8h4dy61jyqnrrq/AddContact.jpeg?rlkey=w0rgmwlx28ietfw6jxv5aujxm&st=vukhdo4w&raw=1" alt="Tela de adicionar contato" loading="lazy">
+            <img src="https://www.dropbox.com/scl/fi/q8thaenwtlqb2iffou1ub/SearchContact.jpeg?rlkey=hdhxlccq28ws7n5ll83lifwma&st=x35fc77j&raw=1" alt="Busca de contato" loading="lazy">
+            <img src="https://www.dropbox.com/scl/fi/w4382bmctz5j4d6szrufa/ListaContatos.jpeg?rlkey=lhrxrvspeuel1eadev5x258ph&st=ecoj7uay&raw=1" alt="Lista de contatos" loading="lazy">
+          </div>
+          <div>
+            <h3>Lista de Contatos</h3>
+            <p class="muted">Aplicação CRUD simples para gerenciar contatos e handles — criar, editar e deletar.</p>
+            <div class="actions">
+              <span class="badge">CRUD</span>
+              <span class="badge">JS</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Barbie's Lifestyle -->
+        <article class="card panel panel-pad">
+          <div class="thumbs">
+            <img src="https://www.dropbox.com/scl/fi/qnh0dn9wgt91syu7siy8o/Barbie.jpeg?rlkey=lz71scxx3cy1wx0508bdnsmy5&st=qd87o7pw&raw=1" alt="Tela do jogo Barbie's Lifestyle" loading="lazy">
+          </div>
+          <div>
+            <h3>Barbie's Lifestyle</h3>
+            <p class="muted">Jogo temático em que você coleta itens característicos dos filmes da Barbie e acumula Pontos de Glitter conforme o valor dos itens.</p>
+            <div class="actions">
+              <span class="badge">Jogo</span>
+              <span class="badge">JavaScript</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="panel panel-pad reveal" aria-label="Contato">
+      <h2 class="section-title">Contato</h2>
+      <div class="contact-list">
+        <a class="chip" href="mailto:livianessvein@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.5"/><path d="m3 7 8.34 6.255a2 2 0 0 0 2.32 0L22 7" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span>livianessvein@gmail.com</span>
+        </a>
+        <a class="chip" href="https://www.linkedin.com/in/livian-essvein-de-oliveira-95a313207/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 10h3v8H6zM7.5 6.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm4.5 3.5h3v1.2c.42-.78 1.47-1.45 2.76-1.45 2.27 0 3.24 1.44 3.24 4.01V18h-3v-3.8c0-1.33-.45-2.07-1.5-2.07-1.24 0-1.76.87-1.76 2.07V18h-3z" fill="currentColor"/></svg>
+          <span>LinkedIn</span>
+        </a>
+        <a class="chip" href="https://github.com/livianessvein" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.51 2.87 8.33 6.84 9.68.5.1.68-.22.68-.48l-.01-1.7c-2.78.62-3.36-1.37-3.36-1.37-.46-1.2-1.12-1.52-1.12-1.52-.92-.65.07-.64.07-.64 1.02.07 1.56 1.07 1.56 1.07.9 1.58 2.35 1.13 2.92.86.09-.67.35-1.13.63-1.39-2.22-.26-4.56-1.14-4.56-5.08 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.2 9.2 0 0 1 5 0c1.9-1.32 2.74-1.05 2.74-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.64 1.03 2.76 0 3.95-2.34 4.82-4.57 5.08.36.32.68.96.68 1.94l-.01 2.88c0 .27.18.59.69.48A10.06 10.06 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" fill="currentColor"/></svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© <span id="year"></span> Livian Essvein. Todos os direitos reservados.</small>
+    </div>
+  </footer>
+
+  <script>
+    // Atualiza ano do rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Interseção para revelar seções ao rolar
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!prefersReduced){
+      const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); obs.unobserve(e.target); } });
+      }, {threshold: .12});
+      document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el=>el.classList.add('show'));
+    }
+
+    // ===== Lightbox (galeria) =====
+    (function(){
+      const overlay = document.createElement('div');
+      overlay.id = 'lightbox';
+      overlay.setAttribute('aria-hidden','true');
+      overlay.innerHTML = `
+        <div class="lb-frame">
+          <img class="lb-img" alt="Imagem ampliada do projeto" />
+          <div class="lb-controls">
+            <button class="lb-btn lb-prev" aria-label="Anterior">&#10094;</button>
+            <button class="lb-btn lb-next" aria-label="Próxima" style="margin-left:auto">&#10095;</button>
+          </div>
+          <button class="lb-btn lb-close" aria-label="Fechar">&#10005;</button>
+        </div>`;
+      document.body.appendChild(overlay);
+
+      const imgEl = overlay.querySelector('.lb-img');
+      const btnPrev = overlay.querySelector('.lb-prev');
+      const btnNext = overlay.querySelector('.lb-next');
+      const btnClose = overlay.querySelector('.lb-close');
+
+      let gallery = [];
+      let index = 0;
+      let lastActive = null;
+
+      function open(images, startIndex, trigger){
+        gallery = images;
+        index = startIndex;
+        lastActive = trigger || document.activeElement;
+        show(index);
+        overlay.classList.add('show');
+        overlay.removeAttribute('aria-hidden');
+        btnClose.focus();
+        document.addEventListener('keydown', onKey);
+      }
+      function close(){
+        overlay.classList.remove('show');
+        overlay.setAttribute('aria-hidden','true');
+        document.removeEventListener('keydown', onKey);
+        if(lastActive) lastActive.focus();
+      }
+      function show(i){
+        if(i < 0) i = gallery.length - 1;
+        if(i >= gallery.length) i = 0;
+        index = i;
+        imgEl.src = gallery[index].src;
+        imgEl.alt = gallery[index].alt || 'Pré-visualização do projeto';
+      }
+      function onKey(e){
+        if(e.key === 'Escape') return close();
+        if(e.key === 'ArrowRight') return show(index+1);
+        if(e.key === 'ArrowLeft') return show(index-1);
+      }
+
+      // Clique nas miniaturas
+      document.querySelectorAll('.thumbs').forEach(group => {
+        const imgs = Array.from(group.querySelectorAll('img'));
+        imgs.forEach((img, i) => {
+          img.setAttribute('tabindex','0');
+          img.addEventListener('click', (ev)=> open(imgs, i, ev.currentTarget));
+          img.addEventListener('keydown', (ev)=>{ if(ev.key==='Enter' || ev.key===' '){ ev.preventDefault(); open(imgs, i, ev.currentTarget); } });
+        });
+      });
+
+      // Controles
+      btnPrev.addEventListener('click', ()=> show(index-1));
+      btnNext.addEventListener('click', ()=> show(index+1));
+      btnClose.addEventListener('click', close);
+      overlay.addEventListener('click', (e)=>{ if(e.target === overlay) close(); });
+    })();
+  </script>
 </body>
-
 </html>
